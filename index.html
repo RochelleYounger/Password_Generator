@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -15,6 +15,27 @@
       <div class="card">
         <div class="card-header">
           <h2>Generate a Password</h2>
+        </div>
+        <div>
+          <h3>Password Specification</h3>
+            <p>Please check at least one option, and enter desired password length in the form below</p>
+          <form>            
+            <label for="char-lower">Lower Case Letters </label>
+            <input type="checkbox" name="char-lower" id="char-lower" />
+            <label for="charLU">Upper Case Letters</label>
+            <input type="checkbox" name="char-upper" id="char-upper" />
+            <label for="char-num">Numbers</label>
+            <input type="checkbox" name="char-num" id="char-num" />
+            <label for="char-special">Special Characters</label>
+            <input type="checkbox" name="char-special" id="char-special" />
+            <div>
+              <label for="password-length">Enter password length:</label>
+              <input type="text" name="password-length" id="password-length" />
+              <button type="submit">Submit</button>
+            </div>
+            
+            
+          </form>
         </div>
         <div class="card-body">
           <textarea
