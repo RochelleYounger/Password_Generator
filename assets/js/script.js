@@ -6,7 +6,7 @@ var checkboxNum = document.getElementById("char-num");
 var checkboxSpecial = document.getElementById("char-special");
 var passwordLength = document.getElementById("password-length");
 
-// character arrays
+// character strings
 var charLower = "abcdefghijklmnopqrstuvwxyz";
 var charUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var charNum = "012345679";
@@ -54,24 +54,23 @@ var generateCharSet = function () {
   // console.log(useableChar);
 };
 
-// var generatePassword = function () {
-//   var passwordString = "";
-//   for (var i = 0; i < passwordLength.length; i++) {
-//     passwordString = useableChar.indexOf(Math.floor(Math.random() * useableChar.length));
-//     console.log(passwordString);
-//     // passwordString += useableChar[arrRef];
-
-//   }
-// };
-
 function generatePassword() {
   generateCharSet();
   console.log(useableChar);
-  var passwordString = "";
-  for (var i = 0, n =useableChar.length; i < passwordLength.value; ++i) {
-      passwordString += useableChar.charAt(Math.floor(Math.random() * n));
-  }
-  return passwordString;
+    var passwordString = "";
+    if (passwordLength.value < 8 || passwordLength.value > 128) {
+      alert("Password length must be between 8 and 128 characters.");
+      return "";
+    }else {
+      if (useableChar === "") {
+        passwordString = "You must check at least one option to generate.";
+      } else {
+        for (var i = 0, n =useableChar.length; i < passwordLength.value; ++i) {
+            passwordString += useableChar.charAt(Math.floor(Math.random() * n));
+        }
+      }
+      return passwordString;
+    }
 }
 // Write password to the #password input
 function writePassword() {
@@ -87,5 +86,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-About
