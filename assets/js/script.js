@@ -13,6 +13,12 @@ var charNum = "012345679";
 var charSpecial = "~`!@#$%^&*()_-+=[]{}\\|,./<>?";
 var useableChar = "";
 
+// var nullCheck = function() {
+//   if ((lowerCheck = false) && (upperCheck = false) && (numCheck = false) && (specialCheck = false)) {
+//     alert("You must fill out the form!");
+//   }
+// };
+
 var lowerCheck = function () {
   if (checkboxLower.checked) {
     useableChar += charLower;
@@ -51,6 +57,10 @@ var generateCharSet = function () {
   upperCheck();
   numCheck();
   specialCheck();
+  if ((lowerCheck = false) && (upperCheck === false) && (numCheck === false) && (specialCheck === false)) {
+    alert("You must fill out the form.");
+    return false;
+  } 
   // console.log(useableChar);
 };
 
@@ -65,17 +75,32 @@ var generateCharSet = function () {
 // };
 
 function generatePassword() {
-  generateCharSet();
-  console.log(useableChar);
-  var passwordString = "";
-  for (var i = 0, n =useableChar.length; i < passwordLength.value; ++i) {
-      passwordString += useableChar.charAt(Math.floor(Math.random() * n));
+  // nullCheck();
+  if (generateCharSet == false){
+    return false;
+  } else {
+    generateCharSet();
+    console.log(useableChar);
+    var passwordString = "";
+    if (passwordLength.value < 8 || passwordLength.value > 128) {
+      alert("Password length must be between 8 and 128 characters.");
+      return "";
+    }else {
+      for (var i = 0, n =useableChar.length; i < passwordLength.value; ++i) {
+          passwordString += useableChar.charAt(Math.floor(Math.random() * n));
+      }
+      return passwordString;
+    }
   }
-  return passwordString;
 }
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  
+  if (password == false) {
+    alert("You must fill out the form.");
+    return "";
+  } else {
   console.log(password);
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
@@ -83,6 +108,7 @@ function writePassword() {
   // reset useable char [] after password is generated
   console.log(passwordLength.value)
   useableChar = "";
+  }
 }
 
 // Add event listener to generate button
